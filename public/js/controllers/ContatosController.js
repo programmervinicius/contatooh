@@ -10,9 +10,29 @@ angular.module('contatooh').controller('ContatosController', function($scope, $r
 	};
 	$scope.init();
 
+	// Exemplo de promise
+	/*
+	 $http.get('/contatos').then(function(result) {
+	 foo = result.data;
+	 console.log("Lista de contatos encontrada.");
+	 console.log(foo);
+	 }, function(errorMsg) {
+	 console.log("Lista de contatos não encontrada.");
+	 console.log(errorMsg);
+	 });
+	 */
+
 	function buscaContatos() {
 		var Contato = $resource('/contatos');
-		$scope.contatos = Contato.query();
+
+		Contato.query(function(contatos) {
+			if (contatos.length > 0) {
+				$scope.contatos = contatos;
+				console.log(contatos.length + " contato(s) encontrado(s).");
+			} else {
+				console.log("Nenhum contato encontrado.");
+			}
+		});
 	};
 	buscaContatos();
 });
