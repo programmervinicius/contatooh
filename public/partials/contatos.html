@@ -1,0 +1,28 @@
+<!-- public/partials/contatos.html -->
+<div class="jumbotron">
+	<h1 class="text-center">Bem Vindo ao Contatooh </h1>
+</div>
+<button ng-click="incrementa()" class="btn btn-primary">
+	Novo
+</button>
+<input ng-model="filtro" type="search" placeholder="parte do nome" />
+<p>
+	Contatos cadastrados: {{contatos.length}}
+</p>
+<div class="table table-responsive">
+	<table class="table table-hover">
+		<tr>
+			<th>NOME</th>
+			<th>EMAIL</th>
+			<th class="text-center">Ação</th>
+		</tr>
+		<tr ng-repeat="contato in contatos | filter: filtro">
+			<td><a>{{contato.nome}}</a></td>
+			<td>{{contato.email}}</td>
+			<td class="text-center">
+			<button class="btn btn-warning">
+				Remover
+			</button></td>
+		</tr>
+	</table>
+</div>
