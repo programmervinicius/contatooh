@@ -15,33 +15,39 @@
  }; */
 
 var express = require('express'),
-    //home = require('../app/routes/home'),
+//home = require('../app/routes/home'),
     load = require('express-load'),
     bodyParser = require('body-parser');
 
 module.exports = function() {
-	var app = express();
+    var app = express();
 
-	app.set('port', 3000);
+    app.set('port', 3000);
 
-	// Entrega os arquivos estáticos da pasta public
-	app.use(express.static('./public'));
-	// Entrega os arquivos estáticos na subpasta images da pasta public
-	app.use(express.static('./public/images'));
+    // Entrega os arquivos estáticos da pasta public
+    app.use(express.static('./public'));
+    // Entrega os arquivos estáticos na subpasta images da pasta public
+    app.use(express.static('./public/images'));
 
-	app.set('view engine', 'ejs');
-	app.set('views', './app/views');
+    app.set('view engine', 'ejs');
+    app.set('views', './app/views');
 
-	//middleware
-	load('models', {
-		cwd : 'app'
-	}).then('controllers').then('routes').into(app);
+    //middleware
+    load('models', {
+        cwd : 'app'
+    }).then('controllers').then('routes').into(app);
 
-	app.use(bodyParser.urlencoded({
-		extend : true
-	}));
-	app.use(bodyParser.json());
-	app.use(require('method-override')());
+    /*deprecated
+     app.use(bodyParser.urlencoded({
+     extend : true
+     }));
+     app.use(bodyParser.json());*/
 
-	return app;
+    app.use(bodyParser.urlencoded({
+        extended : false
+    }));
+    app.use(bodyParser.json());
+    app.use(require('method-override')());
+
+    return app;
 };
