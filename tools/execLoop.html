@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>execLoop</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<h3 class="left">Clique para executar o loop de 5.001 a 50.000 registros</h3>
+		<button class="btn btn-primary" onclick="executarLoop()">
+			Executar loop
+		</button>
+		<br/>
+		<p id="execLoop"></p>
+		<script>
+			function executarLoop() {
+				var text = "";
+				var i;
+				for ( i = 5001; i <= 50000; i++) {
+					if (i == 5001) {
+						text += "<br>" + "{id : '" + i + "', nome : 'Contato Exemplo " + i + "', email : 'cont" + i + "@empresa.com.br'}" + "<br>";
+					} else if (i == 50000) {
+						text += "{id : '" + i + "', nome : 'Contato Exemplo " + i + "', email : 'cont" + i + "@empresa.com.br'}" + "<br>";
+					} else {
+						text += "{id : '" + i + "', nome : 'Contato Exemplo " + i + "', email : 'cont" + i + "@empresa.com.br'}," + "<br>";
+					}
+				}
+				document.getElementById("execLoop").innerHTML = text;
+			}
+		</script>
+	</body>
+</html>
