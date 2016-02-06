@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>execLoop</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="demo.css"/>
+	</head>
+	<body>
+		<p>
+			<h3 class="left">Clique para executar o loop de muitos registros</h3>
+		</p>
+		<button class="btn btn-primary" onclick="executarLoop()">
+			Executar loop
+		</button>
+		<br/>
+
+		<p id="execLoop"></p>
+
+		<script async="" src="FileSaver.js"</script>
+		<script async="" src="demo.js"</script>
+
+		<script>
+			function executarLoop() {
+				var texto = "",
+				    aspaDupla = "\""
+				var i;
+
+				for ( i = 1; i <= 200000; i++) {
+					if (i == 1) {
+						texto += "<br> {id : " + aspaDupla + i + aspaDupla + ", nome : " + aspaDupla + "Contato Exemplo " + i + aspaDupla + ", email : " + aspaDupla + "cont" + i + "@empresa.com.br" + aspaDupla + "}, <br>";
+					} else if (i == 200000) {
+						texto += " {id : " + aspaDupla + i + aspaDupla + ", nome : " + aspaDupla + "Contato Exemplo " + i + aspaDupla + ", email : " + aspaDupla + "cont" + i + "@empresa.com.br" + aspaDupla + "} <br>";
+					} else {
+						texto += " {id : " + aspaDupla + i + aspaDupla + ", nome : " + aspaDupla + "Contato Exemplo " + i + aspaDupla + ", email : " + aspaDupla + "cont" + i + "@empresa.com.br" + aspaDupla + "}, <br>";
+					}
+				}
+
+				document.getElementById("execLoop").innerHTML = texto;
+
+				var blob = new Blob([document.getElementById("execLoop").innerHTML], {
+					type : "text/plain;charset=utf-8"
+				});
+				saveAs(blob, "registros.txt");
+			}
+		</script>
+	</body>
+</html>
