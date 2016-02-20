@@ -1,11 +1,11 @@
-<!-- app/views/index.ejs -->
+<!-- public/index.html -->
 <!doctype html>
 <html>
 <head>
-	<meta charset = "UTF-8">
-	<title> Bem vindo </title>
+   <meta charset="UTF-8">
+   <title>Bem-Vindo</title>
 </head>
 <body>
-	<h1>Bem-vindo ao <%=nome %></h1>
+   <h1>Bem-Vindo ao <%=nome%> </h1>
 </body>
-</html>
+</html>      

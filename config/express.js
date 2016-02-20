@@ -1,53 +1,41 @@
 //config/express.js
-/* var express = require ('express');
-
- module.exports = function() {
- var app = express();
- app.set('port', 3000);
- app.use(express.static('./public'));
- app.set('view engine', 'ejs');
- app.set('views', './app/views');
- var home = require('../app/routes/home.js');
- home(app);
- app.use(app.router);
-
- return app;
- }; */
 
 var express = require('express'),
-//home = require('../app/routes/home'),
     load = require('express-load'),
     bodyParser = require('body-parser');
 
 module.exports = function() {
-    var app = express();
+	var app = express();
 
-    app.set('port', 3000);
+	var cookieParser = require('cookie-parser');
+	var session = require('express-session');
 
-    // Entrega os arquivos estáticos da pasta public
-    app.use(express.static('./public'));
-    // Entrega os arquivos estáticos na subpasta images da pasta public
-    app.use(express.static('./public/images'));
+	var passport = require('passport');
+	app.use(express.static('./public'));
 
-    app.set('view engine', 'ejs');
-    app.set('views', './app/views');
+	app.use(cookieParser());
+	app.use(session({
+		secret : 'homem avestruz',
+		resave : true,
+		saveUninitialized : true
+	}));
 
-    //middleware
-    load('models', {
-        cwd : 'app'
-    }).then('controllers').then('routes').into(app);
+	app.use(passport.initialize());
+	app.use(passport.session());
 
-    /*deprecated
-     app.use(bodyParser.urlencoded({
-     extend : true
-     }));
-     app.use(bodyParser.json());*/
+	app.set('port', 3000);
+	app.set('view engine', 'ejs');
 
-    app.use(bodyParser.urlencoded({
-        extended : false
-    }));
-    app.use(bodyParser.json());
-    app.use(require('method-override')());
+	app.set('views', './app/views');
+	app.use(bodyParser.urlencoded({
+		extended : true
+	}));
 
-    return app;
-};
+	app.use(bodyParser.json());
+	app.use(require('method-override')());
+
+	load('models', {
+		cwd : 'app'
+	}).then('controllers').then('routes').into(app);
+	return app;
+}

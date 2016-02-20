@@ -1,8 +1,10 @@
 {
   "name": "contatooh",
   "version": "0.0.0",
+  "authors": [
+    "ualex <alex_florentino@hotmail.com>"
+  ],
   "license": "MIT",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -13,7 +15,7 @@
   "dependencies": {
     "angular": "1.3",
     "angular-route": "1.3",
-    "bootstrap": "~3.3.6",
+    "bootstrap": "3.3",
     "angular-resource": "1.3"
   }
 }
